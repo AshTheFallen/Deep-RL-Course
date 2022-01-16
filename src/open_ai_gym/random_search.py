@@ -1,5 +1,5 @@
 import gym
-import pyglet
+from gym import wrappers
 import numpy as np
 import matplotlib.pyplot as plt
 from past.builtins import xrange
@@ -10,7 +10,7 @@ def get_action(s, w):
 
 
 def play_one_episode(env, params):
-    env.render()
+    # env.render()
     observation = env.reset()
     done = False
     t = 0
@@ -46,6 +46,7 @@ def random_search(env):
 
 if __name__ == '__main__':
     env = gym.make('CartPole-v0')
+    env = wrappers.Monitor(env, '../../data/saved_videos/CartPole-v0-random_search')
     env.reset()
     episode_length, params = random_search(env)
     plt.plot(episode_length)
